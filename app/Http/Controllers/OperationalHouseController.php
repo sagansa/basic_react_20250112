@@ -34,8 +34,9 @@ class OperationalHouseController extends Controller
         $validated = $request->validate([
             'image' => 'nullable|mimes:jpg,jpeg,png,gif',
             'date' => 'required|date',
-            'month' => 'required|date',
+            'month' => 'nullable|date',
             'amount' => 'required|numeric',
+            'credit_debit' => 'required|string',
             'notes' => 'nullable|string'
         ]);
 
