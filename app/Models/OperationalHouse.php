@@ -20,7 +20,7 @@ class OperationalHouse extends Model
         'user_id',
     ];
 
-    protected $table = 'operasional_houses';
+    protected $table = 'operational_houses';
 
     protected $casts = [
         'date' => 'date',
