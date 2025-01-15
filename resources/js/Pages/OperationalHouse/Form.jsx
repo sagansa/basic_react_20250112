@@ -8,15 +8,6 @@ import { formatRupiah, parseRupiah } from '@/Utils/currency';
 
 export default function Form({ data, setData, errors, processing, submit }) {
     useEffect(() => {
-        if (data.date && !data.date.includes('-')) {
-            const formattedDate = new Date(data.date).toISOString().split('T')[0];
-            setData('date', formattedDate);
-        }
-        if (data.month && !data.month.includes('-')) {
-            const date = new Date(data.month);
-            const formattedMonth = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-            setData('month', formattedMonth);
-        }
         if (data.for && !Array.isArray(data.for)) {
             setData('for', [data.for]);
         }

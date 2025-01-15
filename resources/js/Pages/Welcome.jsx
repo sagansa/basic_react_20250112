@@ -28,7 +28,7 @@ export default function Welcome({ auth }) {
                     <nav className="flex justify-between items-center p-6 mx-auto max-w-7xl lg:px-8" aria-label="Global">
                         <div className="flex lg:flex-1">
                             <Link href="/" className="-m-1.5 p-1.5">
-                                <span className="text-2xl font-bold text-gray-900 dark:text-white">Keluarga Gargar</span>
+                                <span className="text-2xl font-bold text-gray-900 dark:text-white">DEMS</span>
                             </Link>
                         </div>
                         <div className="flex lg:hidden">
@@ -60,7 +60,7 @@ export default function Welcome({ auth }) {
                         <Dialog.Panel className="overflow-y-auto fixed inset-y-0 right-0 z-50 px-6 py-6 w-full bg-white dark:bg-gray-800 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                             <div className="flex justify-between items-center">
                                 <Link href="/" className="-m-1.5 p-1.5">
-                                    <span className="text-xl font-bold text-gray-900 dark:text-white">Keluarga Kami</span>
+                                    <span className="text-xl font-bold text-gray-900 dark:text-white">Keluarga DEMS</span>
                                 </Link>
                                 <button
                                     type="button"
@@ -94,7 +94,7 @@ export default function Welcome({ auth }) {
                     <div className="px-6 py-32 mx-auto max-w-7xl sm:py-40 lg:px-8">
                         <div className="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8">
                             <h1 className="max-w-2xl text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:col-span-2 dark:text-white">
-                                Selamat Datang di Keluarga Gargar
+                                Selamat Datang di Keluarga DEMS
                             </h1>
                             <div className="mt-6 max-w-xl lg:mt-0">
                                 <p className="text-lg text-gray-600 dark:text-gray-300">

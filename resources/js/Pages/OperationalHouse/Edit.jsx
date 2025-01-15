@@ -5,8 +5,8 @@ import Form from './Form';
 export default function Edit({ auth, operationalHouse }) {
     const { data, setData, put, processing, errors } = useForm({
         image: operationalHouse.image || null,
-        date: operationalHouse.date,
-        month: operationalHouse.month,
+        date: operationalHouse.date ? new Date(operationalHouse.date).toISOString().split('T')[0] : '',
+        month: operationalHouse.month ? new Date(operationalHouse.month).toISOString().split('T')[0].substring(0, 7) : '',
         amount: operationalHouse.amount,
         credit_debit: operationalHouse.credit_debit,
         for: operationalHouse.for || [],
