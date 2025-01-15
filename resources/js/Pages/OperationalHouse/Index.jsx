@@ -86,7 +86,7 @@ export default function Index({ auth, summary, operationalHouses }) {
                                             <th className="px-6 pt-5 pb-4 dark:text-gray-200">Payment Month</th>
                                             <th className="px-6 pt-5 pb-4 dark:text-gray-200">Amount</th>
                                             <th className="px-6 pt-5 pb-4 dark:text-gray-200">Cr/Db</th>
-                                            <th className="px-6 pt-5 pb-4 dark:text-gray-200">Notes</th>
+                                            <th className="px-6 pt-5 pb-4 dark:text-gray-200">for</th>
                                             <th className="px-6 pt-5 pb-4 dark:text-gray-200">User</th>
                                             <th className="px-6 pt-5 pb-4 dark:text-gray-200">Action</th>
                                         </tr>
@@ -110,7 +110,7 @@ export default function Index({ auth, summary, operationalHouses }) {
                                                     {operationalHouse.credit_debit}
                                                 </td>
                                                 <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
-                                                    {operationalHouse.notes}
+                                                    {Array.isArray(operationalHouse.for) ? operationalHouse.for.join(', ') : operationalHouse.for}
                                                 </td>
                                                 <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
                                                     {operationalHouse.user.name}

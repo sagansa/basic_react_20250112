@@ -4,11 +4,12 @@ import Form from './Form';
 
 export default function Edit({ auth, operationalHouse }) {
     const { data, setData, put, processing, errors } = useForm({
-        image: null,
+        image: operationalHouse.image || null,
         date: operationalHouse.date,
-        month: new Date(operationalHouse.month).toISOString().split('T')[0].substring(0, 7),
+        month: operationalHouse.month,
         amount: operationalHouse.amount,
         credit_debit: operationalHouse.credit_debit,
+        for: operationalHouse.for || [],
         notes: operationalHouse.notes,
     });
 

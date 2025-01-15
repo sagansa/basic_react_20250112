@@ -267,6 +267,87 @@ export default function AuthenticatedLayout({ header, children }) {
                         >
                             Dashboard
                         </ResponsiveNavLink>
+                        {hasPermission('view_roles') && (
+                            <ResponsiveNavLink
+                                href={route('roles.index')}
+                                active={route().current('roles.index')}
+                                className="dark:text-gray-200"
+                            >
+                                Roles
+                            </ResponsiveNavLink>
+                        )}
+                        {hasPermission('view_permissions') && (
+                            <ResponsiveNavLink
+                                href={route('permissions.index')}
+                                active={route().current('permissions.index')}
+                                className="dark:text-gray-200"
+                            >
+                                Permissions
+                            </ResponsiveNavLink>
+                        )}
+                        {hasPermission('view_users') && (
+                            <ResponsiveNavLink
+                                href={route('users.index')}
+                                active={route().current('users.index')}
+                                className="dark:text-gray-200"
+                            >
+                                Users
+                            </ResponsiveNavLink>
+                        )}
+                        {hasPermission('view_units') && (
+                            <ResponsiveNavLink
+                                href={route('units.index')}
+                                active={route().current('units.index')}
+                                className="dark:text-gray-200"
+                            >
+                                Units
+                            </ResponsiveNavLink>
+                        )}
+                        {hasPermission('view_subjects') && (
+                            <ResponsiveNavLink
+                                href={route('subjects.index')}
+                                active={route().current('subjects.index')}
+                                className="dark:text-gray-200"
+                            >
+                                Subjects
+                            </ResponsiveNavLink>
+                        )}
+                        {hasPermission('view_rewards') && (
+                            <ResponsiveNavLink
+                                href={route('rewards.index')}
+                                active={route().current('rewards.index')}
+                                className="dark:text-gray-200"
+                            >
+                                Rewards
+                            </ResponsiveNavLink>
+                        )}
+                        {hasPermission('view_golds') && (
+                            <ResponsiveNavLink
+                                href={route('golds.index')}
+                                active={route().current('golds.index')}
+                                className="dark:text-gray-200"
+                            >
+                                Golds
+                            </ResponsiveNavLink>
+                        )}
+                        {hasPermission('view_product_golds') && (
+                            <ResponsiveNavLink
+                                href={route('product-golds.index')}
+                                active={route().current('product-golds.index')}
+                                className="dark:text-gray-200"
+                            >
+                                Product Golds
+                            </ResponsiveNavLink>
+                        )}
+                        {hasPermission('view_operational_houses') && (
+                            <ResponsiveNavLink
+                                href={route('operational-houses.index')}
+                                active={route().current('operational-houses.index')}
+                                className="dark:text-gray-200"
+                            >
+                                Operational Laweyan
+                            </ResponsiveNavLink>
+                        )}
                     </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">

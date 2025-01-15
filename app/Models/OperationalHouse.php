@@ -16,6 +16,7 @@ class OperationalHouse extends Model
         'month',
         'amount',
         'credit_debit',
+        'for',
         'notes',
         'user_id',
     ];
@@ -25,7 +26,8 @@ class OperationalHouse extends Model
     protected $casts = [
         'date' => 'date',
         'month' => 'date',
-        'amount' => 'integer'
+        'amount' => 'integer',
+        'for' => 'array',
     ];
     public function user(): BelongsTo
     {

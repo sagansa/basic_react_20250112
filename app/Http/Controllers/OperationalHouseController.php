@@ -37,6 +37,7 @@ class OperationalHouseController extends Controller
             'month' => 'nullable|date',
             'amount' => 'required|numeric',
             'credit_debit' => 'required|string',
+            'for' => 'required|array',
             'notes' => 'nullable|string'
         ]);
 
@@ -49,13 +50,23 @@ class OperationalHouseController extends Controller
     public function edit(OperationalHouse $operationalHouse)
     {
         return Inertia::render('OperationalHouse/Edit', [
-            'operationalHouse' => $operationalHouse,
-            ]);
+            'operationalHouse' => $operationalHouse->load('user'),
+        ]);
     }
 
     public function update(Request $request, OperationalHouse $operationalHouse)
     {
-        $operationalHouse->update($request->all());
+        $validated = $request->validate([
+            'image' => 'nullable|mimes:jpg,jpeg,png,gif',
+            'date' => 'required|date',
+            'month' => 'nullable|date',
+            'amount' => 'required|numeric',
+            'credit_debit' => 'required|string',
+            'for' => 'required|array',
+            'notes' => 'nullable|string'
+        ]);
+
+        $operationalHouse->update($validated);
         return redirect()->route('operational-houses.index');
     }
 

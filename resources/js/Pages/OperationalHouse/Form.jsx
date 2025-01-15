@@ -8,20 +8,33 @@ import { formatRupiah, parseRupiah } from '@/Utils/currency';
 
 export default function Form({ data, setData, errors, processing, submit }) {
     useEffect(() => {
-        if (data.date) {
+        if (data.date && !data.date.includes('-')) {
             const formattedDate = new Date(data.date).toISOString().split('T')[0];
             setData('date', formattedDate);
         }
-        if (data.month) {
+        if (data.month && !data.month.includes('-')) {
             const date = new Date(data.month);
             const formattedMonth = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
             setData('month', formattedMonth);
+        }
+        if (data.for && !Array.isArray(data.for)) {
+            setData('for', [data.for]);
         }
     }, []);
 
     const handleAmountChange = (e) => {
         const value = parseRupiah(e.target.value);
         setData('amount', value);
+    };
+
+    const handleCheckboxChange = (e) => {
+        const { value, checked } = e.target;
+        const currentFor = data.for || [];
+        if (checked) {
+            setData('for', [...currentFor, value]);
+        } else {
+            setData('for', currentFor.filter(item => item !== value));
+        }
     };
 
     return (
@@ -84,13 +97,125 @@ export default function Form({ data, setData, errors, processing, submit }) {
                     name="credit_debit"
                     value={data.credit_debit}
                     onChange={e => setData('credit_debit', e.target.value)}
-                    className="block mt-1 w-full dark:bg-gray-900 dark:text-gray-100"
+                    className="dark:bg-gray-900 dark:text-gray-100"
                 >
                     <option value="">Pilih Jenis</option>
                     <option value="cr">Kredit</option>
                     <option value="db">Debit</option>
                 </SelectInput>
                 <InputError message={errors.credit_debit} className="mt-2" />
+            </div>
+
+            <div>
+                <fieldset>
+                    <legend className="text-sm font-medium text-gray-900 dark:text-gray-200">
+                        Untuk
+                    </legend>
+                    <div className="mt-4 space-y-5">
+                        <div className="flex gap-3">
+                            <div className="flex items-center h-6 shrink-0">
+                                <div className="grid grid-cols-1 group size-4">
+                                    <input
+                                        type="checkbox"
+                                        id="bulanan"
+                                        name="bulanan"
+                                        value="bulanan"
+                                        checked={data.for?.includes('bulanan')}
+                                        onChange={handleCheckboxChange}
+                                        className="col-start-1 row-start-1 bg-white rounded-sm border border-gray-300 appearance-none checked:border-indigo-600 checked:bg-indigo-600 dark:border-gray-600 dark:bg-gray-900 dark:checked:border-indigo-500 dark:checked:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    />
+                                    <svg
+                                        fill="none"
+                                        viewBox="0 0 14 14"
+                                        className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white"
+                                    >
+                                        <path
+                                            d="M3 8L6 11L11 3.5"
+                                            strokeWidth={2}
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            className="opacity-0 group-has-checked:opacity-100"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div className="text-sm/6">
+                                <label htmlFor="bulanan" className="font-medium text-gray-900 dark:text-gray-200">
+                                    Bulanan
+                                </label>
+                            </div>
+                        </div>
+
+                        <div className="flex gap-3">
+                            <div className="flex items-center h-6 shrink-0">
+                                <div className="grid grid-cols-1 group size-4">
+                                    <input
+                                        type="checkbox"
+                                        id="pbb"
+                                        name="pbb"
+                                        value="pbb"
+                                        checked={data.for?.includes('pbb')}
+                                        onChange={handleCheckboxChange}
+                                        className="col-start-1 row-start-1 bg-white rounded-sm border border-gray-300 appearance-none checked:border-indigo-600 checked:bg-indigo-600 dark:border-gray-600 dark:bg-gray-900 dark:checked:border-indigo-500 dark:checked:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    />
+                                    <svg
+                                        fill="none"
+                                        viewBox="0 0 14 14"
+                                        className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white"
+                                    >
+                                        <path
+                                            d="M3 8L6 11L11 3.5"
+                                            strokeWidth={2}
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            className="opacity-0 group-has-checked:opacity-100"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div className="text-sm/6">
+                                <label htmlFor="pbb" className="font-medium text-gray-900 dark:text-gray-200">
+                                    PBB
+                                </label>
+                            </div>
+                        </div>
+
+                        <div className="flex gap-3">
+                            <div className="flex items-center h-6 shrink-0">
+                                <div className="grid grid-cols-1 group size-4">
+                                    <input
+                                        type="checkbox"
+                                        id="lainnya"
+                                        name="lainnya"
+                                        value="lainnya"
+                                        checked={data.for?.includes('lainnya')}
+                                        onChange={handleCheckboxChange}
+                                        className="col-start-1 row-start-1 bg-white rounded-sm border border-gray-300 appearance-none checked:border-indigo-600 checked:bg-indigo-600 dark:border-gray-600 dark:bg-gray-900 dark:checked:border-indigo-500 dark:checked:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    />
+                                    <svg
+                                        fill="none"
+                                        viewBox="0 0 14 14"
+                                        className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white"
+                                    >
+                                        <path
+                                            d="M3 8L6 11L11 3.5"
+                                            strokeWidth={2}
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            className="opacity-0 group-has-checked:opacity-100"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div className="text-sm/6">
+                                <label htmlFor="lainnya" className="font-medium text-gray-900 dark:text-gray-200">
+                                    Lainnya
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <InputError message={errors.for} className="mt-2" />
             </div>
 
             <div>

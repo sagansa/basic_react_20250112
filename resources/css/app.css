@@ -21,3 +21,9 @@
 .dark .bg-gradient-custom {
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
 }
+
+@layer utilities {
+    .group-has-checked\:opacity-100[data-group-has-checked] {
+        opacity: 1;
+    }
+}
