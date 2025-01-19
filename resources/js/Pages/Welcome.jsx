@@ -40,7 +40,7 @@ export default function Welcome({ auth }) {
                                 <span className="sr-only">Buka menu utama</span>
                                 <Bars3Icon className="w-6 h-6" aria-hidden="true" />
                             </button>
-                        </div>
+                            </div>
                         {auth.user && (
                             <div className="hidden lg:flex lg:gap-x-12">
                                 {navigation.map((item) => (

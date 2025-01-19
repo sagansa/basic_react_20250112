@@ -12,11 +12,33 @@ class GoldController extends Controller
 {
     public function index()
     {
+        $golds = Gold::with(['productGold', 'user'])
+            ->where('user_id', auth()->user()->id)
+            ->latest()
+            ->get();
+
+        // Hitung total per produk
+        $productTotals = $golds->groupBy('product_gold.name')
+            ->map(function ($items) {
+                $firstItem = $items->first();
+                $weight = $firstItem->product_gold->weight ?? 1; // Default ke 1 jika weight null
+                $totalBuyPrice = $items->sum('buy_price');
+
+                return [
+                    'count' => $items->count(),
+                    'total_buy_price' => $totalBuyPrice,
+                    'unit' => $firstItem->product_gold->unit->unit ?? '-',
+                    'weight' => $weight,
+                    'price_per_weight' => $weight > 0 ? $totalBuyPrice / ($weight * $items->count()) : 0, // Harga per satuan berat
+                ];
+            });
+
+        // $buyPriceWeight = $golds-
+
         return Inertia::render('Gold/Index', [
-            'golds' => Gold::with(['productGold', 'user'])
-                ->where('user_id', auth()->user()->id)
-                ->latest()
-                ->get()
+            'golds' => $golds,
+            'productTotals' => $productTotals,
+            // 'buyPricePerWeight' => $buyPriceWeight,
         ]);
     }
 
@@ -33,11 +55,13 @@ class GoldController extends Controller
     {
         $validated = $request->validate([
             'product_gold_id' => 'required|exists:product_golds,id',
-            'date' => 'required|date',
-            'buy_from' => 'required|string',
-            'buy_price' => 'required|numeric',
+            'date' => 'nullable|date',
+            'receipt_no' => 'nullable|string',
+            'production_year' => 'nullable|integer',
+            'buy_from' => 'nullable|string',
+            'buy_price' => 'nullable|numeric',
             'stored_in' => 'required|string',
-            'sn' => 'nullable|string',
+            'sn' => 'required|string',
         ]);
 
         $validated['user_id'] = Auth::id();
@@ -64,13 +88,14 @@ class GoldController extends Controller
     {
         $validated = $request->validate([
             'product_gold_id' => 'required|exists:product_golds,id',
-            'date' => 'required|date',
+            'date' => 'nullable|date',
+            'production_year' => 'nullable|date',
             'buy_from' => 'required|string',
             'buy_price' => 'required|numeric',
             'sell_price' => 'required|numeric',
             'sell_to' => 'required|string',
             'stored_in' => 'required|string',
-            'sn' => 'nullable|string',
+            'sn' => 'required|string',
         ]);
 
         $gold->update($validated);

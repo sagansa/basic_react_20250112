@@ -54,6 +54,7 @@ export default function Index({ auth, productGolds }) {
                                     <thead>
                                         <tr className="font-bold text-left bg-gray-50 dark:bg-gray-700">
                                             <th className="px-6 pt-5 pb-4 dark:text-gray-200">Nama</th>
+                                            <th className="px-6 pt-5 pb-4 dark:text-gray-200">Berat</th>
                                             <th className="px-6 pt-5 pb-4 dark:text-gray-200">Unit</th>
                                             <th className="px-6 pt-5 pb-4 dark:text-gray-200">Aksi</th>
                                         </tr>
@@ -63,6 +64,9 @@ export default function Index({ auth, productGolds }) {
                                             <tr key={product.id} className="hover:bg-gray-50 focus-within:bg-gray-50 dark:hover:bg-gray-700 dark:focus-within:bg-gray-700">
                                                 <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
                                                     {product.name}
+                                                </td>
+                                                <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+                                                    {product.weight}
                                                 </td>
                                                 <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
                                                     {product.unit.name}

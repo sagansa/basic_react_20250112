@@ -21,6 +21,8 @@ class Gold extends Model
         'stored_in',
         'user_id',
         'sn',
+        'production_year',
+        'receipt_no',
     ];
 
     protected $table = 'golds';

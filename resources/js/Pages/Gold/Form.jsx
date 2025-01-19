@@ -42,6 +42,32 @@ export default function Form({ data, setData, errors, processing, submit, produc
             </div>
 
             <div>
+                <InputLabel htmlFor="sn" value="Serial Number" className="dark:text-gray-200" />
+                <TextInput
+                    id="sn"
+                    type="text"
+                    name="sn"
+                    value={data.sn}
+                    onChange={e => setData('sn', e.target.value)}
+                    className="block mt-1 w-full dark:bg-gray-900 dark:text-gray-100"
+                />
+                <InputError message={errors.sn} className="mt-2" />
+            </div>
+
+            <div>
+                <InputLabel htmlFor="production_year" value="Produksi No" className="dark:text-gray-200" />
+                <TextInput
+                    id="production_year"
+                    type="text"
+                    name="production_year"
+                    value={data.production_year}
+                    onChange={e => setData('production_year', e.target.value)}
+                    className="block mt-1 w-full dark:bg-gray-900 dark:text-gray-100"
+                />
+                <InputError message={errors.production_year} className="mt-2" />
+            </div>
+
+            <div>
                 <InputLabel htmlFor="date" value="Tanggal" className="dark:text-gray-200" />
                 <TextInput
                     id="date"
@@ -56,6 +82,19 @@ export default function Form({ data, setData, errors, processing, submit, produc
             </div>
 
             <div>
+                <InputLabel htmlFor="receipt_no" value="Receipt No" className="dark:text-gray-200" />
+                <TextInput
+                    id="receipt_no"
+                    type="text"
+                    name="receipt_no"
+                    value={data.receipt_no}
+                    onChange={e => setData('sn', e.target.value)}
+                    className="block mt-1 w-full dark:bg-gray-900 dark:text-gray-100"
+                />
+                <InputError message={errors.receipt_no} className="mt-2" />
+            </div>
+
+            <div>
                 <InputLabel htmlFor="buy_from" value="Beli Dari" className="dark:text-gray-200" />
                 <TextInput
                     id="buy_from"
@@ -64,7 +103,7 @@ export default function Form({ data, setData, errors, processing, submit, produc
                     value={data.buy_from}
                     onChange={e => setData('buy_from', e.target.value)}
                     className="block mt-1 w-full dark:bg-gray-900 dark:text-gray-100"
-                    disabled={isEdit}
+                    // disabled={isEdit}
                 />
                 <InputError message={errors.buy_from} className="mt-2" />
             </div>
@@ -93,19 +132,6 @@ export default function Form({ data, setData, errors, processing, submit, produc
                     name="stored_in"
                     value={data.stored_in}
                     onChange={e => setData('stored_in', e.target.value)}
-                    className="block mt-1 w-full dark:bg-gray-900 dark:text-gray-100"
-                />
-                <InputError message={errors.stored_in} className="mt-2" />
-            </div>
-
-            <div>
-                <InputLabel htmlFor="sn" value="Serial Number" className="dark:text-gray-200" />
-                <TextInput
-                    id="sn"
-                    type="text"
-                    name="sn"
-                    value={data.sn}
-                    onChange={e => setData('sn', e.target.value)}
                     className="block mt-1 w-full dark:bg-gray-900 dark:text-gray-100"
                 />
                 <InputError message={errors.stored_in} className="mt-2" />

@@ -11,6 +11,7 @@ class ProductGold extends Model
 
     protected $fillable = [
         'name',
+        'weight',
         'unit_id'
     ];
 
