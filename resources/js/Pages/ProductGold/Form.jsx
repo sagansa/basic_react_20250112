@@ -21,6 +21,19 @@ export default function Form({ data, setData, errors, processing, submit, units 
             </div>
 
             <div>
+                <InputLabel htmlFor="weight" value="Berat" className="dark:text-gray-200" />
+                <TextInput
+                    id="weight"
+                    type="text"
+                    name="weight"
+                    value={data.weight}
+                    onChange={e => setData('weight', e.target.value)}
+                    className="block mt-1 w-full dark:bg-gray-900 dark:text-gray-100"
+                />
+                <InputError message={errors.weight} className="mt-2" />
+            </div>
+
+            <div>
                 <InputLabel htmlFor="unit_id" value="Unit" className="dark:text-gray-200" />
                 <SelectInput
                     id="unit_id"

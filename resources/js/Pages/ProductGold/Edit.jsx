@@ -5,6 +5,7 @@ import Form from './Form';
 export default function Edit({ auth, productGold, units }) {
     const { data, setData, patch, processing, errors } = useForm({
         name: productGold.name,
+        weight: productGold.weight,
         unit_id: productGold.unit_id,
     });
 

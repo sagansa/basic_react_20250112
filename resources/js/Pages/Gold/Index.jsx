@@ -106,65 +106,6 @@ export default function Index({ auth, golds, productTotals }) {
                         </div>
                     </div>
 
-                    {/* Product Summary */}
-                    <div className="overflow-hidden mb-8 bg-white rounded-lg shadow dark:bg-gray-800">
-                        <div className="p-6">
-                            <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">
-                                Ringkasan per Produk
-                            </h3>
-                            <div className="overflow-x-auto">
-                                <table className="w-full">
-                                    <thead>
-                                        <tr className="text-left bg-gray-50 dark:bg-gray-700">
-                                            <th className="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                                                Nama Produk
-                                            </th>
-                                            <th className="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                                                Jumlah
-                                            </th>
-                                            <th className="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                                                Berat
-                                            </th>
-                                            <th className="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                                                Satuan
-                                            </th>
-                                            <th className="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                                                Total Harga Beli
-                                            </th>
-                                            <th className="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                                                Harga/Gram
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                                        {Object.entries(productTotals).map(([productName, data]) => (
-                                            <tr key={productName} className="dark:bg-gray-800">
-                                                <td className="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
-                                                    {productName}
-                                                </td>
-                                                <td className="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
-                                                    {data.count}
-                                                </td>
-                                                <td className="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
-                                                    {data.weight}
-                                                </td>
-                                                <td className="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
-                                                    {data.unit}
-                                                </td>
-                                                <td className="px-6 py-4 text-sm font-semibold text-blue-600 dark:text-blue-400">
-                                                    {formatCurrency(data.total_buy_price)}
-                                                </td>
-                                                <td className="px-6 py-4 text-sm font-semibold text-purple-600 dark:text-purple-400">
-                                                    {formatCurrency(data.price_per_weight)}/{data.unit}
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
                     {/* Table Container */}
                     <div className="overflow-x-auto bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
                         <div className="p-6 text-gray-900 dark:text-gray-100">
@@ -233,7 +174,7 @@ export default function Index({ auth, golds, productTotals }) {
                                             {sortColumn === 'stored_in' && (sortDirection === 'asc' ? ' 🔼' : ' 🔽')}
                                         </th>
                                         <th className="px-6 pt-5 pb-4 cursor-pointer dark:text-gray-200">
-                                            Harga Beli / gram
+                                            Harga Beli (Rp) / gram
                                         </th>
                                         <th className="px-6 pt-5 pb-4 dark:text-gray-200">Action</th>
                                     </tr>
@@ -265,12 +206,14 @@ export default function Index({ auth, golds, productTotals }) {
                                             <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 dark:text-gray-200">
                                                 {gold.sell_to}
                                             </td>
-
                                             <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 dark:text-gray-200">
                                                 {gold.stored_in}
                                             </td>
+                                            <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 dark:text-gray-200">
+                                                {gold.buy_price_per_weight}
+                                            </td>
                                             <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
-                                                <div className="flex gap-4 items-center">
+                                                <div className="flex gap-2 items-center">
                                                     {hasPermission('edit_golds') && (
                                                         <Link href={route('golds.edit', gold.id)}>
                                                             <PrimaryButton>

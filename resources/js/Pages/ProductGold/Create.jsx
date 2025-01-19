@@ -5,6 +5,7 @@ import Form from './Form';
 export default function Create({ auth, units }) {
     const { data, setData, post, processing, errors } = useForm({
         name: '',
+        weight: '',
         unit_id: '',
     });
 

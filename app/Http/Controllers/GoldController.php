@@ -12,33 +12,18 @@ class GoldController extends Controller
 {
     public function index()
     {
-        $golds = Gold::with(['productGold', 'user'])
-            ->where('user_id', auth()->user()->id)
+        $golds = Gold::with(['productGold'])
             ->latest()
             ->get();
 
-        // Hitung total per produk
-        $productTotals = $golds->groupBy('product_gold.name')
-            ->map(function ($items) {
-                $firstItem = $items->first();
-                $weight = $firstItem->product_gold->weight ?? 1; // Default ke 1 jika weight null
-                $totalBuyPrice = $items->sum('buy_price');
-
-                return [
-                    'count' => $items->count(),
-                    'total_buy_price' => $totalBuyPrice,
-                    'unit' => $firstItem->product_gold->unit->unit ?? '-',
-                    'weight' => $weight,
-                    'price_per_weight' => $weight > 0 ? $totalBuyPrice / ($weight * $items->count()) : 0, // Harga per satuan berat
-                ];
-            });
-
-        // $buyPriceWeight = $golds-
+        // Menambahkan perhitungan harga beli per berat untuk setiap item
+        foreach ($golds as $gold) {
+            $weight = $gold->productGold->weight ?? 1; // Default ke 1 jika weight null
+            $gold->buy_price_per_weight = $weight > 0 ? $gold->buy_price / $weight : 0; // Harga beli per berat
+        }
 
         return Inertia::render('Gold/Index', [
             'golds' => $golds,
-            'productTotals' => $productTotals,
-            // 'buyPricePerWeight' => $buyPriceWeight,
         ]);
     }
 

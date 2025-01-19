@@ -27,6 +27,7 @@ class ProductGoldController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'weight' => 'required|numeric',
             'unit_id' => 'required|exists:units,id',
         ]);
 
@@ -48,6 +49,7 @@ class ProductGoldController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'weight' => 'required|numeric',
             'unit_id' => 'required|exists:units,id',
         ]);
 
