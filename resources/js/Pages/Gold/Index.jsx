@@ -53,7 +53,6 @@ export default function Index({ auth, golds, productTotals }) {
     // Hitung total
     const totalBuyPrice = sortedGolds.reduce((total, gold) => total + (gold.buy_price || 0), 0);
     const totalSellPrice = sortedGolds.reduce((total, gold) => total + (gold.sell_price || 0), 0);
-    const totalProducts = sortedGolds.length;
 
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('id-ID', {
@@ -87,9 +86,9 @@ export default function Index({ auth, golds, productTotals }) {
                     {/* Summary Cards */}
                     <div className="grid grid-cols-1 gap-4 mb-8 md:grid-cols-3">
                         <div className="p-6 bg-white rounded-lg shadow dark:bg-gray-800">
-                            <div className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Produk</div>
+                            <div className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Berat</div>
                             <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                                {totalProducts} Item
+                                {/* {formatCurrency(totalWeight)} */}
                             </div>
                         </div>
                         <div className="p-6 bg-white rounded-lg shadow dark:bg-gray-800">
@@ -149,18 +148,22 @@ export default function Index({ auth, golds, productTotals }) {
                                             Produk
                                             {sortColumn === 'product_gold.name' && (sortDirection === 'asc' ? ' 🔼' : ' 🔽')}
                                         </th>
+                                        <th onClick={() => handleSort('buy_price')} className="px-6 pt-5 pb-4 cursor-pointer dark:text-gray-200">
+                                            Harga Beli
+                                            {sortColumn === 'buy_price' && (sortDirection === 'asc' ? ' 🔼' : ' 🔽')}
+                                        </th>
+                                        <th className="px-6 pt-5 pb-4 cursor-pointer dark:text-gray-200">
+                                            Harga Beli (Rp) / gram
+                                        </th>
                                         <th onClick={() => handleSort('date')} className="px-6 pt-5 pb-4 cursor-pointer dark:text-gray-200">
-                                            Tanggal
+                                            Dibeli Tanggal
                                             {sortColumn === 'date' && (sortDirection === 'asc' ? ' 🔼' : ' 🔽')}
                                         </th>
                                         <th onClick={() => handleSort('buy_from')} className="px-6 pt-5 pb-4 cursor-pointer dark:text-gray-200">
                                             Beli Dari
                                             {sortColumn === 'buy_from' && (sortDirection === 'asc' ? ' 🔼' : ' 🔽')}
                                         </th>
-                                        <th onClick={() => handleSort('buy_price')} className="px-6 pt-5 pb-4 cursor-pointer dark:text-gray-200">
-                                            Harga Beli
-                                            {sortColumn === 'buy_price' && (sortDirection === 'asc' ? ' 🔼' : ' 🔽')}
-                                        </th>
+
                                         <th onClick={() => handleSort('sell_price')} className="px-6 pt-5 pb-4 cursor-pointer dark:text-gray-200">
                                             Harga Jual
                                             {sortColumn === 'sell_price' && (sortDirection === 'asc' ? ' 🔼' : ' 🔽')}
@@ -173,9 +176,7 @@ export default function Index({ auth, golds, productTotals }) {
                                             Disimpan Di
                                             {sortColumn === 'stored_in' && (sortDirection === 'asc' ? ' 🔼' : ' 🔽')}
                                         </th>
-                                        <th className="px-6 pt-5 pb-4 cursor-pointer dark:text-gray-200">
-                                            Harga Beli (Rp) / gram
-                                        </th>
+
                                         <th className="px-6 pt-5 pb-4 dark:text-gray-200">Action</th>
                                     </tr>
                                 </thead>
@@ -191,14 +192,18 @@ export default function Index({ auth, golds, productTotals }) {
                                             <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 dark:text-gray-200">
                                                 {gold.product_gold?.name}
                                             </td>
+
+                                            <td className="px-6 py-4 font-semibold text-blue-600 border-t border-gray-200 dark:border-gray-700 dark:text-blue-400">
+                                                {formatCurrency(gold.buy_price)}
+                                            </td>
+                                            <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 dark:text-gray-200">
+                                                {formatCurrency(gold.buy_price_per_weight)}
+                                            </td>
                                             <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 dark:text-gray-200">
                                                 {new Date(gold.date).toLocaleDateString('id-ID')}
                                             </td>
                                             <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 dark:text-gray-200">
                                                 {gold.buy_from}
-                                            </td>
-                                            <td className="px-6 py-4 font-semibold text-blue-600 border-t border-gray-200 dark:border-gray-700 dark:text-blue-400">
-                                                {formatCurrency(gold.buy_price)}
                                             </td>
                                             <td className="px-6 py-4 font-semibold text-green-600 border-t border-gray-200 dark:border-gray-700 dark:text-green-400">
                                                 {formatCurrency(gold.sell_price)}
@@ -209,9 +214,7 @@ export default function Index({ auth, golds, productTotals }) {
                                             <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 dark:text-gray-200">
                                                 {gold.stored_in}
                                             </td>
-                                            <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 dark:text-gray-200">
-                                                {gold.buy_price_per_weight}
-                                            </td>
+
                                             <td className="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
                                                 <div className="flex gap-2 items-center">
                                                     {hasPermission('edit_golds') && (

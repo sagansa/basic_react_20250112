@@ -13,6 +13,7 @@ class GoldController extends Controller
     public function index()
     {
         $golds = Gold::with(['productGold'])
+            ->where('user_id', auth()->user()->id)
             ->latest()
             ->get();
 
@@ -22,8 +23,14 @@ class GoldController extends Controller
             $gold->buy_price_per_weight = $weight > 0 ? $gold->buy_price / $weight : 0; // Harga beli per berat
         }
 
+        // Hitung total berat
+        $totalWeight = $golds->sum(function ($gold) {
+            return $gold->productGold->weight ?? 0; // Mengambil weight dari productGold
+        });
+
         return Inertia::render('Gold/Index', [
             'golds' => $golds,
+            'totalWeight' => $totalWeight, // Pastikan totalWeight dikirim
         ]);
     }
 
@@ -74,11 +81,11 @@ class GoldController extends Controller
         $validated = $request->validate([
             'product_gold_id' => 'required|exists:product_golds,id',
             'date' => 'nullable|date',
-            'production_year' => 'nullable|date',
+            'production_year' => 'nullable|integer',
             'buy_from' => 'required|string',
             'buy_price' => 'required|numeric',
-            'sell_price' => 'required|numeric',
-            'sell_to' => 'required|string',
+            'sell_price' => 'nullable|numeric',
+            'sell_to' => 'nullable|string',
             'stored_in' => 'required|string',
             'sn' => 'required|string',
         ]);
