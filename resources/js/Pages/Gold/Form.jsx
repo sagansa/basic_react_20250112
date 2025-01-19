@@ -76,7 +76,7 @@ export default function Form({ data, setData, errors, processing, submit, produc
                     value={data.date}
                     onChange={e => setData('date', e.target.value)}
                     className="block mt-1 w-full dark:bg-gray-900 dark:text-gray-100"
-                    disabled={isEdit}
+                    // disabled={isEdit}
                 />
                 <InputError message={errors.date} className="mt-2" />
             </div>
@@ -118,7 +118,7 @@ export default function Form({ data, setData, errors, processing, submit, produc
                         value={formatRupiah(data.buy_price)}
                         onChange={(e) => handlePriceChange(e, 'buy_price')}
                         className="block mt-1 w-full dark:bg-gray-900 dark:text-gray-100"
-                        disabled={isEdit}
+                        // disabled={isEdit}
                     />
                 </div>
                 <InputError message={errors.buy_price} className="mt-2" />
