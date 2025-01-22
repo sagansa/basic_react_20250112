@@ -55,7 +55,7 @@ export default function Form({ data, setData, errors, processing, submit, produc
             </div>
 
             <div>
-                <InputLabel htmlFor="production_year" value="Produksi No" className="dark:text-gray-200" />
+                <InputLabel htmlFor="production_year" value="Produksi Tahun" className="dark:text-gray-200" />
                 <TextInput
                     id="production_year"
                     type="text"
@@ -88,7 +88,7 @@ export default function Form({ data, setData, errors, processing, submit, produc
                     type="text"
                     name="receipt_no"
                     value={data.receipt_no}
-                    onChange={e => setData('sn', e.target.value)}
+                    onChange={e => setData('receipt_no', e.target.value)}
                     className="block mt-1 w-full dark:bg-gray-900 dark:text-gray-100"
                 />
                 <InputError message={errors.receipt_no} className="mt-2" />
