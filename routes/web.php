@@ -10,6 +10,8 @@ use App\Http\Controllers\RewardController;
 use App\Http\Controllers\RewardSummaryController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\GoldPriceController;
+use App\Http\Controllers\GoldPriceSourceController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -49,6 +51,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('golds', GoldController::class);
     Route::resource('units', UnitController::class);
     Route::resource('product-golds', ProductGoldController::class);
+    Route::resource('gold-price-sources', GoldPriceSourceController::class);
+    Route::resource('gold-prices', GoldPriceController::class)->only(['index', 'store']);
+    Route::get('api/gold-prices', [GoldPriceController::class, 'getPrices'])->name('gold-prices.api');
 });
 
 Route::get('/about', function () {

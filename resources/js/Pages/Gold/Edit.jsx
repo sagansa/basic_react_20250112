@@ -2,9 +2,10 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import Form from './Form';
 
-export default function Edit({ auth, gold, productGolds }) {
+export default function Edit({ auth, gold, productGolds, priceSources, previous_url }) {
     const { data, setData, patch, processing, errors } = useForm({
         product_gold_id: gold.product_gold_id || '',
+        gold_price_source_id: gold.gold_price_source_id || '',
         date: gold.date || '',
         buy_from: gold.buy_from || '',
         buy_price: gold.buy_price || '',
@@ -12,6 +13,7 @@ export default function Edit({ auth, gold, productGolds }) {
         sell_to: gold.sell_to || '',
         stored_in: gold.stored_in || '',
         sn: gold.sn || '',
+        previous_url: previous_url || '',
     });
 
     const submit = (e) => {
@@ -37,6 +39,7 @@ export default function Edit({ auth, gold, productGolds }) {
                                 processing={processing}
                                 submit={submit}
                                 productGolds={productGolds}
+                                priceSources={priceSources}
                                 isEdit={true}
                             />
                         </div>

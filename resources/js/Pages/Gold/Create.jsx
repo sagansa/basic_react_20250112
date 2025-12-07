@@ -2,9 +2,10 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import Form from './Form';
 
-export default function Create({ auth, productGolds }) {
+export default function Create({ auth, productGolds, priceSources }) {
     const { data, setData, post, processing, errors } = useForm({
         product_gold_id: '',
+        gold_price_source_id: '',
         date: '',
         buy_from: '',
         buy_price: '',
@@ -34,6 +35,7 @@ export default function Create({ auth, productGolds }) {
                                 processing={processing}
                                 submit={submit}
                                 productGolds={productGolds}
+                                priceSources={priceSources}
                             />
                         </div>
                     </div>

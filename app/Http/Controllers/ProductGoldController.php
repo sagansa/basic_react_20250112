@@ -11,14 +11,14 @@ class ProductGoldController extends Controller
 {
     public function index()
     {
-        return Inertia::render('ProductGold/Index', [
+        return Inertia::render('Gold/Product/Index', [
             'productGolds' => ProductGold::with('unit')->latest()->get(),
         ]);
     }
 
     public function create()
     {
-        return Inertia::render('ProductGold/Create', [
+        return Inertia::render('Gold/Product/Create', [
             'units' => Unit::orderBy('name')->get()
         ]);
     }
@@ -39,7 +39,7 @@ class ProductGoldController extends Controller
 
     public function edit(ProductGold $productGold)
     {
-        return Inertia::render('ProductGold/Edit', [
+        return Inertia::render('Gold/Product/Edit', [
             'productGold' => $productGold,
             'units' => Unit::orderBy('name')->get()
         ]);

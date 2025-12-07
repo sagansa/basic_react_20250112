@@ -140,16 +140,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </div>
                             )}
 
-                            {hasPermission('view_product_golds') && (
-                                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                    <NavLink
-                                        href={route('product-golds.index')}
-                                        active={route().current('product-golds.*')}
-                                    >
-                                        Product Golds
-                                    </NavLink>
-                                </div>
-                            )}
+
 
                             {hasPermission('view_operational_houses') && (
                                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -330,15 +321,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                 Golds
                             </ResponsiveNavLink>
                         )}
-                        {hasPermission('view_product_golds') && (
-                            <ResponsiveNavLink
-                                href={route('product-golds.index')}
-                                active={route().current('product-golds.index')}
-                                className="dark:text-gray-200"
-                            >
-                                Product Golds
-                            </ResponsiveNavLink>
-                        )}
+
                         {hasPermission('view_operational_houses') && (
                             <ResponsiveNavLink
                                 href={route('operational-houses.index')}

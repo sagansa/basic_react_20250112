@@ -23,6 +23,7 @@ class Gold extends Model
         'sn',
         'production_year',
         'receipt_no',
+        'gold_price_source_id',
     ];
 
     protected $table = 'golds';
@@ -51,6 +52,11 @@ class Gold extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function goldPriceSource()
+    {
+        return $this->belongsTo(GoldPriceSource::class, 'gold_price_source_id', 'id');
     }
 
     protected $with = ['productGold'];
