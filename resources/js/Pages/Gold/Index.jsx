@@ -26,7 +26,7 @@ export default function Index({ auth, golds, totalWeight, totalBuyPrice, ...prop
         setSortDirection(direction);
     };
 
-    const goldsData = golds.data || [];
+    const goldsData = Array.isArray(golds?.data) ? golds.data : [];
 
     const filteredGolds = goldsData.filter(gold => {
         const productName = gold.product_gold?.name?.toLowerCase() || '';

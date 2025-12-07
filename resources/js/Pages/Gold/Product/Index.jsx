@@ -14,7 +14,9 @@ export default function Index({ auth, productGolds }) {
         setSearch(e.target.value);
     };
 
-    const filteredProducts = productGolds.filter(product =>
+    const productsList = Array.isArray(productGolds) ? productGolds : [];
+
+    const filteredProducts = productsList.filter(product =>
         product.name.toLowerCase().includes(search.toLowerCase())
     );
 
